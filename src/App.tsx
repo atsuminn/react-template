@@ -45,7 +45,7 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
     this.state = {
       myJankenValue: 0,
       enemyJankenValue: 1,
-      result: ''
+      result: '',
     };
     // this.handleJankenChange = this.handleJankenChange.bind(this);
   }
@@ -54,9 +54,11 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
     const enemyHand = Math.floor(Math.random() * 3);
     let resultText = '';
     if (parseInt(e.currentTarget.value, 10) === enemyHand) {
-      resultText = '引き分け';
+      resultText = 'draw';
     } else {
-      resultText = handtypes[parseInt(e.currentTarget.value, 10)].win === handtypes[enemyHand].lose ? '勝ち' : '負け';
+      console.warn(handtypes[parseInt(e.currentTarget.value, 10)].win);
+      console.warn(handtypes[enemyHand].lose);
+      resultText = handtypes[parseInt(e.currentTarget.value, 10)].win === handtypes[enemyHand].id ? 'win' : 'lose';
       // if (handtypes[parseInt(e.currentTarget.value, 10)].win === handtypes[enemyHand].lose) {
       //   resultText = '勝ち';
       // } else {
@@ -75,15 +77,15 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
   render() {
     
     return (
-      <div>
+      <div className="wrap">
         <div className="game-control">
           <input type="image" src="img/guu.png" name="guu" value="0" id="guu" alt="guu" height="50" width="50" onClick={this.handleJankenChange}/>
           <input type="image" src="img/tyoki.png" name="tyoki" value="1" id="tyoki" alt="tyoki" height="50" width="50" onClick={this.handleJankenChange}/>
           <input type="image" src="img/paa.png" name="paa" value="2" id="paa" alt="paa" height="50" width="50" onClick={this.handleJankenChange}/>
         </div>
-          プレイヤー:<span className="result_player">{this.state.myJankenValue}{/*ここにプレイヤーの出した手を表示*/}</span>
-          CPU:<span className="result_cpu">{this.state.enemyJankenValue}{/* ここにCPUの出した手を表示*/}</span>
-          結果:<p className="result_box">{this.state.result}</p>
+        <p>you:<img width="25" src={window.location.origin + '/img/' + handtypes[this.state.myJankenValue].id + '.png'} alt=""/></p>
+        <p>cpu:<img width="25" src={window.location.origin + '/img/' + handtypes[this.state.enemyJankenValue].id + '.png'} alt=""/></p>
+          結果:<span className={this.state.result}>{this.state.result}</span>
         </div>
       
     );
