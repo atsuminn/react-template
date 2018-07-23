@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-
+// じゃんけん定義
 const handtypes = [
   {
       'id': 'guu',
@@ -24,14 +24,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <h1 className="App-title">じゃんけん</h1>
           <h3>手を選んでくだしゃい</h3>
           
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        </p> */}
       </div>
     );
   }
@@ -39,7 +39,9 @@ class App extends React.Component {
 
 export default App;
 
+// JankenClass
 export class Janken extends React.Component < {} , {myJankenValue: number; enemyJankenValue: number; result: string; } > { 
+  // コンストラクタ初期設定
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -49,7 +51,7 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
     };
     // this.handleJankenChange = this.handleJankenChange.bind(this);
   }
-
+  // じゃんけん処理
   handleJankenChange = (e: React.FormEvent<HTMLInputElement>): void => {
     const enemyHand = Math.floor(Math.random() * 3);
     let resultText = '';
@@ -65,7 +67,7 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
       //   resultText = '負け';
       // }
     }
-
+    // データをセット
     this.setState(
       {myJankenValue: parseInt(e.currentTarget.value, 10),
        enemyJankenValue: enemyHand,
@@ -75,7 +77,7 @@ export class Janken extends React.Component < {} , {myJankenValue: number; enemy
   }
 
   render() {
-    
+    // 表示
     return (
       <div className="wrap">
         <div className="game-control">
